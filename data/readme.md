@@ -39,7 +39,10 @@ The data sets used are from [here](https://archive.ics.uci.edu/ml/datasets/stude
 - ***internet*** - Internet access at home (Factor w/ 2 levels: yes or no)  
 - ***romantic*** - with a romantic relationship (Factor w/ 2 levels: yes or no)
 
-
+## For the combined files:
+- ***_x*** - information related to the Portuguese class
+- ***_y*** - information related to the mathematics class
+- ***classes*** - 0 if the student took both classes, 1 if the student took only the mathematics class and 2 if the student took only the Portuguese class (this variable shall be found only in students-combined-outer.csv)
 
 
 # References: 
