@@ -19,8 +19,8 @@ The data sets used are from [here](https://archive.ics.uci.edu/ml/datasets/stude
 33: G3 - final grade (int: from 0 to 20)
 
 ## FACTOR variables
-- **school** - student's school (Factor w/ 2 levels: "GP" - Gabriel Pereira or "MS" - Mousinho da Silveira)  
-- sex - student's sex (Factor w/ 2 levels: "F" - female or "M" - male)
+- ***school*** - student's school (Factor w/ 2 levels: "GP" - Gabriel Pereira or "MS" - Mousinho da Silveira)  
+- **sex** - student's sex (Factor w/ 2 levels: "F" - female or "M" - male)
 - address - student's home address type (Factor w/ 2 levels: "U" - urban or "R" - rural)  
 - famsize - family size (Factor w/ 2 levels: "LE3" - less or equal to 3 or "GT3" - greater than 3)  
 - Pstatus - parent's cohabitation status (Factor w/ 2 levels: "T" - living together or "A" - apart)
