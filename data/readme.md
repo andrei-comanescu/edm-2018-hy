@@ -1,7 +1,13 @@
 The data sets used are from [here](https://archive.ics.uci.edu/ml/datasets/student+performance), available via [them](http://www3.dsi.uminho.pt/pcortez/student.pdf).
 
-## INT variables
+## QUANTITATIVE variables
 - ***age*** - student's age (int: from 15 to 22)
+- ***absences*** - number of school absences (int: from 0 to 93)  
+- ***G1*** - first period grade (int: from 0 to 20)  
+- ***G2*** - second period grade (int: from 0 to 20)  
+- ***G3*** - final grade (int: from 0 to 20)
+
+## ORDINAL variables
 - ***Medu*** - mother's education (int: 0 - none,  1 - primary education (4th grade), 2 – 5th to 9th grade, 3 – secondary education or 4 – higher education)  
 - ***Fedu*** - father's education (int: 0 - none,  1 - primary education (4th grade), 2 – 5th to 9th grade, 3 – secondary education or 4 – higher education)
 - ***traveltime*** - home to school travel time (int: 1 - <15 min., 2 - 15 to 30 min., 3 - 30 min. to 1 hour, or 4 - >1 hour)  
@@ -13,10 +19,6 @@ The data sets used are from [here](https://archive.ics.uci.edu/ml/datasets/stude
 - ***Dalc*** - workday alcohol consumption (int: from 1 - very low to 5 - very high)  
 - ***Walc*** - weekend alcohol consumption (int: from 1 - very low to 5 - very high)  
 - ***health*** - current health status (int: from 1 - very bad to 5 - very good)  
-- ***absences*** - number of school absences (int: from 0 to 93)  
-- ***G1*** - first period grade (int: from 0 to 20)  
-- ***G2*** - second period grade (int: from 0 to 20)  
-- ***G3*** - final grade (int: from 0 to 20)
 
 ## FACTOR variables
 - ***school*** - student's school (Factor w/ 2 levels: "GP" - Gabriel Pereira or "MS" - Mousinho da Silveira)  
