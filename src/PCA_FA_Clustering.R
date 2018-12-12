@@ -194,7 +194,7 @@ plot(kmedoid,which=1,main ="K-Medoids Clustering for Math students")
 set.seed(13)
 kmeans_math=kmeans(d1_reduced,centers=4)
 ggplot(aes(y = G3, x = as.factor(kmeans_math$cluster) ), data = d1) +
-  ggtitle("G3 vs. K-means clusters obtained using original variables") +
+  ggtitle("G3 in Mathematics vs. K-means clusters with original variables") +
   geom_boxplot() +
   xlab("Cluster")
 
@@ -214,7 +214,7 @@ kruskal.test(d1$G3~kmeans_math$cluster)
 set.seed(13)
 kmeans_fa_math=kmeans(fa_math$scores,centers=4)
 ggplot(aes(y = G3, x = as.factor(kmeans_fa_math$cluster) ), data = d1) +
-  ggtitle("G3 vs. K-means clusters obtained using FA scores") +
+  ggtitle("G3 in Mathematics vs. K-means clusters with FA scores") +
   geom_boxplot() +
   xlab("Cluster")
 
@@ -259,7 +259,7 @@ plot(kmedoid,which=1,main ="K-Medoids Clustering for Portuguese students")
 set.seed(13)
 kmeans_port=kmeans(d2_reduced,centers=5)
 ggplot(aes(y = G3, x = as.factor(kmeans_port$cluster) ), data = d2) +
-  ggtitle("G3 vs. K-means clusters obtained using original variables") +
+  ggtitle("G3 in Portuguese vs. K-means clusters with original variables") +
   geom_boxplot() +
   xlab("Cluster")
 
@@ -272,14 +272,14 @@ bartlett.test(d2$G3~kmeans_port$cluster)
 
 # try Kruskal-Wallis test
 kruskal.test(d2$G3~kmeans_port$cluster)
-# can't reject the null hypothesis (i.e. sample originate from the same distribution)
+4# can't reject the null hypothesis (i.e. sample originate from the same distribution)
 
 ####### K-Means using FA scores ########
 
 set.seed(13)
-kmeans_fa_port=kmeans(fa_port$scores,centers=4)
+kmeans_fa_port=kmeans(fa_port$scores,centers=5)
 ggplot(aes(y = G3, x = as.factor(kmeans_fa_port$cluster) ), data = d2) +
-  ggtitle("G3 vs. K-means clusters obtained using FA scores") +
+  ggtitle("G3 in Portuguese vs. K-means clusters with FA scores") +
   geom_boxplot() +
   xlab("Cluster")
 
@@ -297,3 +297,89 @@ hist(d2$G3)
 summary(aov(d2$G3~kmeans_fa_port$cluster))
 # reject H0
 # there is a statistical signficant difference between the mean final grades (G3) of the cluster
+
+
+###### T-TEST and ANOVA ######
+
+##### Remove G1=0, G2=0 and G3=0
+d1=d1[d1$G1>0,]
+d2=d2[d2$G1>0,]
+
+d1=d1[d1$G2>0,]
+d2=d2[d2$G2>0,]
+
+d1=d1[d1$G3>0,]
+d2=d2[d2$G3>0,]
+
+nrow(d1) # now 357, before 395 
+nrow(d2) # now 633, before 649
+##### MATH
+# 1) Parent Status vs. Grades
+t.test(d1$G1~d1$Pstatus) # accept
+t.test(d1$G2~d1$Pstatus) # accept
+t.test(d1$G3~d1$Pstatus) # accept
+
+# 1) Parent Status vs. Absences
+t.test(d1$absences~d1$Pstatus) # accept
+
+# 2) Desire vs. Grades *****
+t.test(d1$G1~d1$higher) # reject
+t.test(d1$G2~d1$higher) # reject
+t.test(d1$G3~d1$higher) # reject
+
+# 2) Desire vs. Absences
+t.test(d1$absences~d1$higher) # accept
+
+# 3/4) Parent Education vs. Grades *****
+# Mother
+summary(aov(d1$G1~d1$Medu)) # reject
+summary(aov(d1$G2~d1$Medu)) # reject
+summary(aov(d1$G3~d1$Medu)) # reject
+# Father
+summary(aov(d1$G1~d1$Fedu)) # reject
+summary(aov(d1$G2~d1$Fedu)) # reject
+summary(aov(d1$G3~d1$Fedu)) # reject
+
+# 3/4) Parent Education vs. Absences
+summary(aov(d1$absences~d1$Medu)) # accept
+summary(aov(d1$absences~d1$Fedu)) # accept
+
+# 5) Parent Education vs. Desire
+chisq.test(d1$higher,as.factor(d1$Medu)) # too few units in one cell
+chisq.test(d1$higher,as.factor(d1$Fedu)) # too few units in one cell
+
+
+##### PORT
+# 1) Parent Status vs. Grades
+t.test(d2$G1~d2$Pstatus) # accept
+t.test(d2$G2~d2$Pstatus) # accept
+t.test(d2$G3~d2$Pstatus) # accept
+
+# 1) Parent Status vs. Absences ****
+t.test(d2$absences~d2$Pstatus) # reject
+
+# 2) Desire vs. Grades *****
+t.test(d2$G1~d2$higher) # reject
+t.test(d2$G2~d2$higher) # reject
+t.test(d2$G3~d2$higher) # reject
+
+# 2) Desire vs. Absences *****
+t.test(d2$absences~d2$higher) # reject
+
+# 3/4) Parent Education vs. Grades *****
+# Mother
+summary(aov(d2$G1~d2$Medu)) # reject
+summary(aov(d2$G2~d2$Medu)) # reject
+summary(aov(d2$G3~d2$Medu)) # reject
+# Father
+summary(aov(d2$G1~d2$Fedu)) # reject
+summary(aov(d2$G2~d2$Fedu)) # reject
+summary(aov(d2$G3~d2$Fedu)) # reject
+
+# 3/4) Parent Education vs. Absences
+summary(aov(d2$absences~d2$Medu)) # accept
+summary(aov(d2$absences~d2$Fedu)) # accept
+
+# 5) Parent Education vs. Desire
+chisq.test(d2$higher,as.factor(d2$Medu)) # too few units in one cell
+chisq.test(d2$higher,as.factor(d2$Fedu)) # too few units in one cell
